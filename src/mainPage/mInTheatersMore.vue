@@ -74,18 +74,14 @@
 		}
 	}
 	.ul_subjects{
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		padding: 0 .08rem;
-
+		padding: 0 .03rem;
 		.subject{
-			width: .85rem;
+			width: 33.3333%;
+			box-sizing: border-box;
 			display: inline-block;
 			vertical-align: top;
-			padding: 0 .03rem 0.15rem;
+			padding: 0 .1rem 0.15rem;
 			text-align: center;
-
 			.imgwarp{
 				height: 1.2rem;
 				background-size: cover;
