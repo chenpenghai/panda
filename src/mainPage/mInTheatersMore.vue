@@ -83,12 +83,16 @@
 			padding: 0 .1rem 0.15rem;
 			text-align: center;
 			.imgwarp{
+				width: .85rem;
 				height: 1.2rem;
+				margin: auto;
 				background-size: cover;
 				background-position: center;			
 			}
 			.title{
-				padding: .05rem 0 .03rem;
+				width: .85rem;
+				margin:auto;
+				padding: 0.05rem 0 .03rem;
 				text-align: center;
 				display: block;
 				overflow:hidden; 
@@ -97,6 +101,8 @@
 				font-size: .13rem;
 			}
 			.rating{
+				width: .85rem;
+				margin:auto;
 				font-size: .1rem;
 				color:gray;
 				i.iconfont{
