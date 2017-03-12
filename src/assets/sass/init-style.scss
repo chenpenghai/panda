@@ -1,0 +1,91 @@
+@charset "utf-8";
+html { font-size: 100px; }
+@media(min-width: 320px) { html { font-size: 100px; } }
+@media(min-width: 375px) { html { font-size: 117.2px; } }
+@media(min-width: 400px) { html { font-size: 125px; } }
+@media(min-width: 640px) { html { font-size: 200px; } }
+@media(min-width: 768px) { html { font-size: 240px; } }
+@media(min-width: 1024px) { html { font-size: 320px; } }
+* {
+    /*禁止选中*/
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'Helvetica';
+    font-size: .16rem;
+    max-width: 1024px;
+    overflow-x: hidden;
+    margin: auto;
+}
+/*去除搜索框中的叉*/
+input::-webkit-search-cancel-button{
+    display: none;
+}
+/*去除number类型的上下箭头*/
+input[type=number] {  
+    -moz-appearance:textfield;  
+}  
+input[type=number]::-webkit-inner-spin-button,  
+input[type=number]::-webkit-outer-spin-button {  
+    -webkit-appearance: none;  
+    margin: 0;  
+} 
+/*webkit去除表单元素的默认样式*/
+input,
+textarea,
+button {
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    border:1px solid #aaa;
+}
+/*webkit表单输入框placeholder的颜色值*/
+input::-webkit-input-placeholder{color: #ddd;}
+input:focus::-webkit-input-placeholder{color: #eee;}
+/*去除android a/button/input标签被点击时产生的边框 去除ios a标签被点击时产生的半透明灰色背景*/
+a,
+button,
+input{
+    -webkit-tap-highlight-color:rgba(255,0,0,0);
+}
+ul,ol{
+    list-style-type: none;
+}
+h1 {
+  font-size: .25rem; 
+}
+h2 {
+  font-size: .18rem; 
+}
+h3 {
+  font-size: .15rem; 
+}
+h4 {
+  font-size: .12rem; 
+}
+img{
+    width: 100%;
+}
+i.iconfont{
+    font-size: .16rem;
+  }
+.centerV:before{
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    font-size: 0;
+}
+.justifyLayout:after{
+    content: "";
+    width: 100%;
+    display: inline-block;
+}
