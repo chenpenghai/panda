@@ -1,6 +1,15 @@
+1. 这或许不是个好项目，因为这个项目的目的是为了淌坑，所以有很多地方仅仅是为了技术而不是实现。
+
+2. 技术问题 
+
+2.1 单文件组件异步加载
+2.2 vue多页面实现
+2.3 vue自定义事件不如自己用props更灵活，用回调方法实现
+
+
 # bookstore
 
-> A Vue.js project
+> A Vue.js project and webpack/
 
 ## Build Setup
 
