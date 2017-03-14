@@ -1,13 +1,11 @@
 <template>
-	<section class="in_theaters">
+	<section>
 		<header>
 			<h3>{{title}}</h3>
-			<!-- <a href="javascript:;" v-on:click="routerToMore">更多 > </a> -->
-			<router-link :to="{ path: 'search', query: { rank:rank, title:title }} " >更多</router-link>
 		</header>
 		<div class="ul_warp">
 			<ul class="ul_subjects">
-				<li class="subject" v-for="subject in subjectsSlice">
+				<li class="subject" v-for="subject in subjects">
 					<div class="imgwarp" :style="{backgroundImage:url(subject.images.medium)}">
 					</div>
 					<span class="title">{{subject.title}}</span>
@@ -29,48 +27,58 @@
 </script>
 <script>
 	export default {
-		props: ['rank','title'],
-		data: function() {
+		data () {
 			return {
-				subjects: []
-			}
-		},
-		computed:{
-			subjectsSlice:function(){
-				return  this.subjects.slice(0,8);
+				subjects: [],
+				title:"加载中..."
 			}
 		},
 		methods:{
-			url:function( url ){
-					return "url("+url+")";
+			url:function(url){
+				return "url("+url+")";
 			},
-			routerToMore : function(){
-				this.moreCallback(this.subjects);
+			loadDate(url,title){
+				console.log(url);
+				var _this = this;
+				$.ajax({
+					url : url, 
+					dataType : "jsonp",	
+					success : function(data, textStatus, jqXHR){ 
+						_this.subjects = data.subjects;
+						_this.title = title;
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown){
+						console.log("error in mMovieList ");	
+					}
+				});
 			}
 		},
 		mounted(){
+			
 		},
-		created(){
-			var _this = this;
-			$.ajax({
-				url : 'https://api.douban.com/v2/movie/'+this.rank, 
-				dataType : "jsonp",	
-				// url : "../jsondata/in_theaters.json", 
-				// dataType : "json",
-				success : function(data, textStatus, jqXHR){ 
-					_this.subjects = data.subjects;
-				},
-				error : function(XMLHttpRequest, textStatus, errorThrown){
-					console.log("error v2/movie/in_theaters : "+textStatus);	
-				}
+		beforeRouteEnter (to, from, next) {
+			var url = "https://api.douban.com/v2/movie/";
+			console.log("fffffffffffffffffffffff");
+			console.log(to);
+			if(to.query.rank){
+				url += to.query.rank
+			}else if(to.query.tag){
+				url += "search?tag="+to.query.tag;
+			}else{
+				next(false);
+				return;
+			}
+			next(function(vm){
+				vm.loadDate(url,to.query.title);
 			});
-		}
+		},
+		// beforeRouteLeave (to, from, next) {
+			// console.log(111111111111111111);
+			// next();
+		// },
 	}
 </script>
 <style scoped lang="scss">
-	.in_theaters{
-		/*padding: 0 .1rem;*/
-	}
 	header{
 		padding: .1rem .11rem;
 		display: flex;
@@ -78,32 +86,31 @@
 	}
 	.ul_warp{
 		overflow: scroll;
-		margin-bottom: .1rem;
 		&::-webkit-scrollbar{
 			width:0px;
 			height: 0px;
 		}
 	}
 	.ul_subjects{
-		margin-bottom: .1rem;
-		display: inline-block;
-		white-space: nowrap;
-		padding: 0 .08rem;
-
+		padding: 0 .03rem;
 		.subject{
-			width: .85rem;
+			width: 33.3333%;
+			box-sizing: border-box;
 			display: inline-block;
 			vertical-align: top;
-			padding: 0 .03rem;
+			padding: 0 .1rem 0.15rem;
 			text-align: center;
-
 			.imgwarp{
+				width: .85rem;
 				height: 1.2rem;
+				margin: auto;
 				background-size: cover;
 				background-position: center;			
 			}
 			.title{
-				padding: .05rem 0 .03rem;
+				width: .85rem;
+				margin:auto;
+				padding: 0.05rem 0 .03rem;
 				text-align: center;
 				display: block;
 				overflow:hidden; 
@@ -112,6 +119,8 @@
 				font-size: .13rem;
 			}
 			.rating{
+				width: .85rem;
+				margin:auto;
 				font-size: .1rem;
 				color:gray;
 				i.iconfont{

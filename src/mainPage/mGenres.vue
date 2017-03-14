@@ -3,8 +3,10 @@
 	<section>
 		<ul>
 			<li class="icon_Item" v-for="icon in iconList">
+			<router-link :to="{ path: 'search', query: { tag:icon.name, title:icon.name}} " >
 				<i :class="['iconfont',icon.iconTag]"></i>
 				<p>{{icon.name}}</p>
+			</router-link>
 			</li>
 		</ul>
 	</section>
@@ -24,7 +26,7 @@
 					{name:"文艺",iconTag:"icon-font38"},
 					{name:"动画",iconTag:"icon-mickey"},
 					{name:"全部",iconTag:"icon-quanbu"}
-				]
+				],
 			}
 		}
 	}

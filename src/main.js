@@ -14,6 +14,12 @@ const mInTheatersMore = resolve => {
   })
 };
 
+const mMovieList = resolve => {
+  require.ensure(['./mainPage/mMovieList.vue'], () => {
+    resolve(require('./mainPage/mMovieList.vue'))
+  })
+};
+
 const router = new Router({
   routes: [{
     path: '/InTheatersMore',
@@ -25,9 +31,10 @@ const router = new Router({
   },{
     path: '/',
     name:'main',
-    beforeEnter: (to, from, next) => {
-      next();
-    }
+  },{
+    path: '/search',
+    name:'mMovieList',
+    component: mMovieList
   }]
 });
 
@@ -35,12 +42,7 @@ const vm = new Vue({
   el: '#main',
   router,
   data:{
-    routerToMore:false,
-    moreCallBack_data:[],
-    moreCallBack : function(data){
-      vm.moreCallBack_data = data;
-      this.$router.push({ name: 'InTheatersMore'})
-    }
+    routerToMore:false
   },
   components: {
   	"mHeader":mHeader,
@@ -49,8 +51,7 @@ const vm = new Vue({
   },
   watch: {
     '$route':function(to, from) {
-      if(to.name == 'InTheatersMore'){
-        to.params.subjects = this.moreCallBack_data;
+      if(from.name == 'main'){
         this.routerToMore = true;
       }else if(to.name == 'main'){
         this.routerToMore = false;

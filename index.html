@@ -16,9 +16,9 @@
 	<div id="main">
 		<m-header></m-header>
 		<div v-show="!routerToMore">
-			<component is="mInTheaters" :more-callback="moreCallBack"></component>
+			<component is="mInTheaters" title="影院热映" rank="in_theaters"></component>
 			<m-genres></m-genres>
-			<!-- <component is="mInTheaters"></component> -->
+			<component is="mInTheaters" title="TOP250" rank="top250"></component>
 		</div>
 		<router-view></router-view>
 	</div>
