@@ -36,8 +36,10 @@ const vm = new Vue({
   router,
   data:{
     routerToMore:false,
+    moreCallBack_data:[],
     moreCallBack : function(data){
-      this.$router.push({ name: 'InTheatersMore', params: { subjects: data }})
+      vm.moreCallBack_data = data;
+      this.$router.push({ name: 'InTheatersMore'})
     }
   },
   components: {
@@ -48,6 +50,7 @@ const vm = new Vue({
   watch: {
     '$route':function(to, from) {
       if(to.name == 'InTheatersMore'){
+        to.params.subjects = this.moreCallBack_data;
         this.routerToMore = true;
       }else if(to.name == 'main'){
         this.routerToMore = false;

@@ -38,22 +38,20 @@
 			}
 		},
 		mounted(){
+			console.log("333333333333");
 			this.subjects = this.$route.params.subjects;
+			console.log(this.$route.params);
 		},
-		watch: {
-    '$route':function(to, from) {
-      if(to.name == 'InTheatersMore'){
-        this.moreCallBack = function(data){
-        }
-        to.params.subjects = "asdassssssssssssssssssssssssssss";
-        this.routerToMore = true;
-      }else if(to.name == 'main'){
-        this.routerToMore = false;
-      }
-    }
-  },
+		beforeRouteEnter (to, from, next) {
+			// console.log("11111111111111111111");
+			// console.log(to.params.ccc);
+			next();
+		},
+		
+
 		// beforeRouteLeave (to, from, next) {
-		// 	next();
+			// console.log(111111111111111111);
+			// next();
 		// },
 	}
 </script>

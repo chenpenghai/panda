@@ -55,7 +55,9 @@
 			var _this = this;
 			$.ajax({
 				url : "https://api.douban.com/v2/movie/in_theaters?count=30", 
-				dataType : "jsonp",
+				dataType : "jsonp",	
+				// url : "../jsondata/in_theaters.json", 
+				// dataType : "json",
 				success : function(data, textStatus, jqXHR){ 
 					_this.subjects = data.subjects;
 				},
