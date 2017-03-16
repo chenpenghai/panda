@@ -1,5 +1,5 @@
 @charset "utf-8";
-html { font-size: 100px; }
+html { font-size: 100px; background-color: white;}
 @media(min-width: 320px) { html { font-size: 100px; } }
 @media(min-width: 375px) { html { font-size: 117.2px; } }
 @media(min-width: 400px) { html { font-size: 125px; } }
@@ -20,10 +20,14 @@ html { font-size: 100px; }
 
 body{
     font-family: 'Helvetica';
-    font-size: .16rem;
+    font-size: .14rem;
     max-width: 1024px;
     overflow-x: hidden;
     margin: auto;
+    background-color: #eee;
+}
+input{
+    font-size: .13rem;
 }
 /*去除搜索框中的叉*/
 input::-webkit-search-cancel-button{
@@ -60,23 +64,23 @@ ul,ol{
     list-style-type: none;
 }
 h1 {
-  font-size: .25rem; 
+    font-size: .25rem; 
 }
 h2 {
-  font-size: .18rem; 
+    font-size: .18rem; 
 }
 h3 {
-  font-size: .15rem; 
+    font-size: .15rem; 
 }
 h4 {
-  font-size: .12rem; 
+    font-size: .12rem; 
 }
 img{
     width: 100%;
 }
 i.iconfont{
     font-size: .16rem;
-  }
+}
 .centerV:before{
     content: "";
     display: inline-block;
@@ -88,4 +92,9 @@ i.iconfont{
     content: "";
     width: 100%;
     display: inline-block;
+}
+a{
+    text-decoration: none;
+    color:black;
+    font-size: .14rem;
 }

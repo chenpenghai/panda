@@ -1,0 +1,82 @@
+.main_content{
+	padding: 0 .15rem;
+	h1{
+		font-size: .2rem;
+		line-height: 2;
+	}
+	.subject-info{
+		font-size: 0;
+		.left{
+			font-size: .1rem;
+			width: 60%;
+			display: inline-block;
+			vertical-align: top;
+			.average{
+				color: #888;
+			}
+			.meta{
+				font-size: .13rem;
+				margin-top: .2rem;
+				line-height: 2;
+			}
+		}
+		.right{
+			width: 40%;
+			display: inline-block;
+			text-align: right;
+			img{
+				width: 90%;
+			}
+		}
+	}
+	h2{
+		font-size: .14rem;
+		font-weight: 200;
+		color: #888;
+		line-height: 3;
+	}
+	.subject-intro{
+		.txt-intro{
+			color: #333;
+			font-size: .13rem;
+			line-height: 1.5;
+			overflow:hidden; /* 设置溢出部分隐藏 */          
+			display: -webkit-box; /* 将对象作为弹性伸缩盒子模型显示 */
+			-webkit-line-clamp: 5; /* 限制在一个块元素显示的文本的行数 */
+			-webkit-box-orient: vertical;  /* 设置或检索伸缩盒对象的子元素的排列方式 */ 
+		}
+		.expand{
+			font-size: .13rem;
+			display: block;
+			text-align: right;
+			color: #777;
+			font-weight: 900;
+		}
+	}
+	.subject-pics{
+		.photo-list{
+			overflow-x: scroll;
+			&::-webkit-scrollbar{
+				width:0px;
+				height: 0px;
+			}
+			.preview{
+				display: inline-block;
+				white-space: nowrap;
+				font-size: 0;
+				li{
+					width: 1rem;
+					font-size:.13rem;
+					display: inline-block;
+					margin: 0 .03rem .1rem;
+					span{
+						display: block;
+						text-align: center;
+						overflow-x: hidden;
+						line-height: 2;
+					}
+				}
+			}
+		}
+	}
+}

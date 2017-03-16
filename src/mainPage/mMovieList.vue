@@ -6,8 +6,10 @@
 		<div class="ul_warp">
 			<ul class="ul_subjects">
 				<li class="subject" v-for="subject in subjects">
-					<div class="imgwarp" :style="{backgroundImage:url(subject.images.medium)}">
-					</div>
+				<a :href="'details.html?id='+subject.id">
+						<div class="imgwarp" :style="{backgroundImage:url(subject.images.medium)}">
+						</div>
+					</a>
 					<span class="title">{{subject.title}}</span>
 					<div class="rating">
 						<span v-if="subject.rating.average > 0">
@@ -61,6 +63,9 @@
 					// dataType : "json",
 					success : function(data, textStatus, jqXHR){ 
 						_this.subjects = _this.subjects.concat(data.subjects);
+						if(data.title){
+							_this.title = data.title;
+						}
 						if(_this.subjects.length == data.total){
 							_this.noMore = true;
 						}
@@ -91,6 +96,8 @@
 				url += to.query.rank
 			}else if(to.query.tag){
 				url += "search?tag="+to.query.tag;
+			}else if(to.query.q){
+				url += "search?q="+to.query.q;
 			}else{
 				next(false);
 				return;

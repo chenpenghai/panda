@@ -8,18 +8,21 @@
 		<div class="ul_warp">
 			<ul class="ul_subjects">
 				<li class="subject" v-for="subject in subjectsSlice">
-					<div class="imgwarp" :style="{backgroundImage:url(subject.images.medium)}">
-					</div>
-					<span class="title">{{subject.title}}</span>
-					<div class="rating">
-						<span v-if="subject.rating.average > 0">
-							<i v-for="n in 5" :style="{color:n<=subject.rating.stars.charAt(0)?'yellow':'gray'}" class="iconfont icon-11"></i>
-							<span>{{subject.rating.average}}</span>
-						</span>
-						<span v-else>
-							暂无评分
-						</span>
-					</div>
+					<a :href="'details.html?id='+subject.id">
+						<div class="imgwarp" :style="{backgroundImage:'url('+subject.images.medium+')'}">
+						</div>
+						<span class="title">{{subject.title}}</span>
+						<div class="rating">
+							<span v-if="subject.rating.average > 0">
+								<i v-for="n in 5" :style="{color:n<=subject.rating.stars.charAt(0)?'yellow':'gray'}" class="iconfont icon-11"></i>
+								<span>{{subject.rating.average}}</span>
+							</span>
+							<span v-else>
+								暂无评分
+							</span>
+						</div>
+
+					</a>
 				</li>
 			</ul>
 		</div>
@@ -41,12 +44,6 @@
 			}
 		},
 		methods:{
-			url:function( url ){
-					return "url("+url+")";
-			},
-			routerToMore : function(){
-				this.moreCallback(this.subjects);
-			}
 		},
 		mounted(){
 		},

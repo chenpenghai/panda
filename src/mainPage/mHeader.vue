@@ -3,7 +3,9 @@
 		<i class="iconfont icon-panda2"></i>
 		<strong >熊猫电影</strong>
 		<div class="inputwarp">
-			<input type="search" name="">
+			<form @submit.prevent="submit(searchTxt)">
+				<input type="search" name="q" v-model="searchTxt">
+			</form>
 			<i class="iconfont icon-sousuo1"></i>
 		</div>
 		<i class="iconfont icon-wodejuhuasuan"></i>
@@ -11,7 +13,17 @@
 </template>
 <script>
 	export default {
-
+		data:function (){
+			return {
+				searchTxt:""
+			}
+		},
+		methods:{
+			submit:function(searchTxt){
+				console.log(searchTxt);
+				this.$router.push({ path: 'search', query: { q: searchTxt }})
+			}
+		}
 	}
 </script>
 <style type="text/css">
@@ -20,7 +32,7 @@
 	}*/
 	#main{
 		margin-top: .4rem;
-		position: fixed;
+		position: absolute;
 		top: 0;
 		bottom: 0;
 		left: 0;

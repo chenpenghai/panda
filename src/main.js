@@ -1,5 +1,5 @@
 require('./assets/iconfont/iconfont.css');
-import initStyle from './assets/sass/initStyle'
+require('./assets/sass/init-style.scss');
 import Vue from 'vue'
 import mHeader from './mainPage/mHeader'
 import mInTheaters from './mainPage/mInTheaters'
@@ -38,11 +38,7 @@ const vm = new Vue({
   },
   watch: {
     '$route':function(to, from) {
-      if(from.name == 'main'){
-        this.routerToMore = true;
-      }else if(to.name == 'main'){
-        this.routerToMore = false;
-      }
+      to.name == 'main'? this.routerToMore = false: this.routerToMore = true;
     }
   },
   mounted(){
