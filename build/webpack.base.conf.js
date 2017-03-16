@@ -2,6 +2,7 @@ var path = require('path')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -44,10 +45,29 @@ module.exports = {
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
-      {
-        test:   /\.scss$/,
-        loader: 'style!css!sass'
-      },
+      // {
+      //   test: /\.css$/,
+      //   loader: ExtractTextPlugin.extract(['style-loader', 'css-loader']) 
+      // },
+      // {
+      //   test: /\.less$/,
+      //   loader: ExtractTextPlugin.extract('css-loader!less-loader')
+      // },
+      // {
+      //   test: /\.css$/,
+      //   use: ExtractTextPlugin.extract({
+      //     fallback: "style-loader",
+      //     use: "css-loader"
+      //   })
+      // },
+      // {
+      //   test:   /\.scss$/,
+        // use:ExtractTextPlugin.extract({
+        //   fallback: "style-loader",
+        //   use: ['css-loader', 'sass-loader']
+        // })
+      //   loaders: ["style-loader", "css-loader", "postcss-loader", "sass-loader"] 
+      // },
       {
         test: /\.js$/,
         loader: 'babel-loader',

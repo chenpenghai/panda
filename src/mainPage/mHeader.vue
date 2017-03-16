@@ -15,8 +15,26 @@
 	}
 </script>
 <style type="text/css">
-	body{
+	/*body{
 		margin-top: .4rem;
+	}*/
+	#main{
+		margin-top: .4rem;
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		overflow-y: hidden;
+		background-color: #eee;
+	}
+	.main_content{
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		overflow-y: scroll;
 	}
 </style>
 <style scoped lang="scss">

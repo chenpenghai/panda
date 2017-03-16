@@ -8,12 +8,6 @@ import Router from 'vue-router'
 import $ from 'n-zepto'
 Vue.use(Router);
 
-const mInTheatersMore = resolve => {
-  require.ensure(['./mainPage/mInTheatersMore.vue'], () => {
-    resolve(require('./mainPage/mInTheatersMore.vue'))
-  })
-};
-
 const mMovieList = resolve => {
   require.ensure(['./mainPage/mMovieList.vue'], () => {
     resolve(require('./mainPage/mMovieList.vue'))
@@ -22,13 +16,6 @@ const mMovieList = resolve => {
 
 const router = new Router({
   routes: [{
-    path: '/InTheatersMore',
-    name:'InTheatersMore',
-    component: mInTheatersMore,
-    beforeEnter: (to, from, next) => {
-      next();
-    }
-  },{
     path: '/',
     name:'main',
   },{

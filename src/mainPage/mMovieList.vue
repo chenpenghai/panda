@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<section class="main_content" @scroll="onScroll($event)" >
 		<header>
 			<h3>{{title}}</h3>
 		</header>
@@ -21,6 +21,7 @@
 				</li>
 			</ul>
 		</div>
+		<p>{{scrollBottom}}</p>
 	</section>
 </template>
 
@@ -30,27 +31,53 @@
 		data () {
 			return {
 				subjects: [],
-				title:"加载中..."
+				title:"",
+				scrollBottom:"加载中...",
+				loading:false,
+				noMore : false,
+				currUrl:""
 			}
 		},
 		methods:{
+			onScroll(ev){
+				var t = ev.currentTarget
+				if(t.scrollTop > (t.scrollHeight-t.offsetHeight - 3) && !this.noMore){
+					this.loadDate(this.currUrl);
+				}
+			},
 			url:function(url){
 				return "url("+url+")";
 			},
-			loadDate(url,title){
-				console.log(url);
+			loadDate(url){
+				if(this.loading){
+					return;
+				}
+				this.loading = true;
 				var _this = this;
 				$.ajax({
-					url : url, 
+					url : url+"&start="+_this.subjects.length+"&count=18", 
 					dataType : "jsonp",	
+					// url : "../jsondata/in_theaters.json", 
+					// dataType : "json",
 					success : function(data, textStatus, jqXHR){ 
-						_this.subjects = data.subjects;
-						_this.title = title;
+						_this.subjects = _this.subjects.concat(data.subjects);
+						if(_this.subjects.length == data.total){
+							_this.noMore = true;
+						}
 					},
 					error : function(XMLHttpRequest, textStatus, errorThrown){
 						console.log("error in mMovieList ");	
+					},
+					complete :function(){
+						_this.loading = false;
+						console.log("completecomplete");
 					}
 				});
+			}
+		},
+		watch:{
+			noMore : function(val, oldVal){
+				val?this.scrollBottom = "没有更多~":this.scrollBottom = "加载中...";
 			}
 		},
 		mounted(){
@@ -69,7 +96,9 @@
 				return;
 			}
 			next(function(vm){
-				vm.loadDate(url,to.query.title);
+				vm.currUrl = url;
+				vm.title = to.query.title;
+				vm.loadDate(url);
 			});
 		},
 		// beforeRouteLeave (to, from, next) {
@@ -79,6 +108,11 @@
 	}
 </script>
 <style scoped lang="scss">
+	section{
+		p{
+			text-align: center;
+		}
+	}
 	header{
 		padding: .1rem .11rem;
 		display: flex;

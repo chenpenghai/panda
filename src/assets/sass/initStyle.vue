@@ -27,6 +27,9 @@ body{
 	margin: auto;
 	background-color: #eee;
 }
+input{
+	font-size: .13rem;
+}
 /*去除搜索框中的叉*/
 input::-webkit-search-cancel-button{
 	display: none;
