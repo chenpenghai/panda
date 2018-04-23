@@ -6,6 +6,9 @@
 2.2 vue多页面实现
 2.3 vue自定义事件不如自己用props更灵活，用回调方法实现
 
+> show address
+https://chenpenghai.github.io/panda/products/index.html
+
 
 # bookstore
 
