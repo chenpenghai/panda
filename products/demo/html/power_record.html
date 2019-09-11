@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>确权记录</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <script type="text/javascript" src="../script/pcbrowser.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/vant.css" />
+    <style>
+        #root-warp{
+            height: 100%;
+            display: flex;
+            display: -webkit-flex;
+            flex-direction: column;
+           -webkit-flex-direction: column;
+        }
+        .van-tabs{
+            flex: 1;
+            -webkit-flex: 1;
+            overflow: hidden;
+        }
+        .van-tabs__content{
+            height: 100%;
+            overflow: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+        .van-tabs__content::-webkit-scrollbar{
+            display: none
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="root-warp">
+        <van-nav-bar left-arrow @click-left="onClickLeft" title="电商集"></van-nav-bar>
+        <van-tabs v-model="tabIndex" color="#1989fa">
+            <van-tab title="全部">
+                <van-cell v-for="data in allData" :title="'订单号'+data.title" :value="data.time" size="large" label="描述信息" />
+                    <template slot="label">
+                        <p v-text="data.price+'元'"></p>
+                        <p v-text="data.content">标签</p>
+                    </template>
+                </van-cell>
+            </van-tab>
+            <van-tab title="未付款">
+                <van-cell v-for="data in nopayData" :title="'订单号'+data.title" :value="data.time" size="large" label="描述信息" />
+                    <template slot="label">
+                        <p v-text="data.price+'元'"></p>
+                        <p v-text="data.content">标签</p>
+                    </template>
+                </van-cell>
+            </van-tab>
+            <van-tab title="待审核">
+                <van-cell v-for="data in checkData" :title="'订单号'+data.title" :value="data.time" size="large" label="描述信息" />
+                    <template slot="label">
+                        <p v-text="data.price+'元'"></p>
+                        <p v-text="data.content">标签</p>
+                    </template>
+                </van-cell>
+            </van-tab>
+        </van-tabs>
+        <div class="content-warp">
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/vant.js"></script>
+<script type="text/javascript">
+initVue();
+
+function initVue() {
+    window.rootVue = new Vue({
+        el: '#root-warp',
+        data: function() {
+            return {
+                tabIndex: 0,
+                allData:[
+                    {title:'13413412341', type:'nopay', content:'共三件商品', price:'350',time:'2019-08-28'},
+                    {title:'23541314132', type:'nopay', content:'共三件商品', price:'3012',time:'2019-08-28'},
+                    {title:'13413412341', type:'nopay', content:'共三件商品', price:'330',time:'2019-08-28'},
+                    {title:'13413412341', type:'nopay', content:'共三件商品', price:'130',time:'2019-08-28'},
+                    {title:'13413412341', type:'check', price:'30',time:'2019-08-28'},
+                    {title:'13413412341', type:'check', price:'440',time:'2019-08-28'},
+                    {title:'13413412341', type:'check', price:'120',time:'2019-08-28'},
+                    {title:'13413412341', type:'check', price:'3680',time:'2019-08-28'},
+                    {title:'13413412341', type:'check', price:'310',time:'2019-08-29'},
+                ],
+            }
+        },
+        computed:{
+            nopayData:function(){
+                return this.allData.filter(function(item){
+                    return item.type == 'nopay'
+                })
+            },
+            checkData:function(){
+                return this.allData.filter(function(item){
+                    return item.type == 'check'
+                })
+            }
+        },
+        methods: {
+            onClickLeft: function() {
+                top.history.back(-1)
+            }
+        },
+        mounted: function() {
+
+        }
+    })
+}
+</script>
+
+</html>

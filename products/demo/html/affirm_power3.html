@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>等待审核</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <script type="text/javascript" src="../script/pcbrowser.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/vant.css" />
+    <style>
+        .btn-submit{
+            position: fixed;
+            bottom: 10vh;
+            left:10vw;
+            width: 80vw;
+        }
+        .info-warp{
+            margin: 20px;
+            margin-top: 15vh;
+            padding: 30px 10px;
+            line-height: 2;
+            border-radius: 10px;
+            font-size: 14px;
+            text-align: center;
+            border: 1px solid #ccc;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root-warp">
+        <van-nav-bar left-arrow @click-left="onClickLeft" title="电商集"></van-nav-bar>
+        <van-steps :active="2">
+            <van-step>上传PDF合同</van-step>
+            <van-step>确认积分</van-step>
+            <van-step>等待审核</van-step>
+        </van-steps>
+        <div class="info-warp">
+                <h3>审核中请稍等</h3>
+                <p>您在8月28日15:34提交预计</p>
+                <p>12小时内审核完毕。</p>
+                <p>请耐心等待。</p>
+        </div>
+        <van-button class="btn-submit" type="info" size="large" @click="submit">返回</van-button>
+    </div>
+</body>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/vant.js"></script>
+<script type="text/javascript">
+initVue();
+
+function initVue() {
+    window.rootVue = new Vue({
+        el: '#root-warp',
+        data: function() {
+            return {
+                fileList:[]
+            }
+        },
+        methods: {
+            submit:function(){
+                 top.location.href = "my.html?userId=1"
+            },
+            onClickLeft:function(){
+                top.history.back(-1)
+            }
+        },
+        mounted: function() {
+
+        }
+    })
+}
+</script>
+
+</html>

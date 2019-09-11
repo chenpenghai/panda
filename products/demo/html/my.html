@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>我的</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <script type="text/javascript" src="../script/pcbrowser.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/vant.css" />
+    <style>
+        .content-warp{
+            position: relative;
+        }
+        .user-warp{
+            padding: 20px 30px;
+            margin-bottom: 50px;
+            box-shadow: 0px 0px 12px #888888;
+        }
+        .user-warp > img{
+            width: 70px;
+            height: 70px;
+            vertical-align: top;
+        }
+        .user-info{
+            vertical-align: top;
+            margin-left: 30px;
+        }
+        .user-info>p{
+            margin-top: 10px;
+        }
+        .van-cell{
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root-warp">
+        <van-nav-bar left-arrow @click-left="onClickLeft" title="电商集"></van-nav-bar>
+        <div class="content-warp">
+            <div class="user-warp">
+                <img src="../image/portrait.png">
+                <span class="user-info">
+                    <p class="">ID: 34564321</p>
+                    <p class="">积分: 1252587</p>
+                </span>
+            </div>
+            <van-cell title="积分记录" is-link icon="balance-list-o" @click="openUrl('integral_record.html')"></van-cell>
+            <van-cell title="确权记录" is-link icon="records" @click="openUrl('power_record.html')"></van-cell>
+            <van-cell title="积分确权" is-link icon="desktop-o" @click="openUrl('affirm_power1.html')"></van-cell>
+            <van-cell title="修改密码" is-link icon="closed-eye" @click="openUrl('change_password.html')"></van-cell>
+            <van-cell></van-cell>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/vant.js"></script>
+<script type="text/javascript">
+initVue();
+
+
+
+function initVue() {
+    window.rootVue = new Vue({
+        el: '#root-warp',
+        data: function() {
+            return {
+            }
+        },
+        methods: {
+            openUrl:function(url){
+                top.location.href = url
+            },
+            onClickLeft:function(){
+                top.history.back(-1)
+            }
+        },
+        mounted: function() {
+            var userId = queryStr('userId')
+            if(!userId){
+                vant.Dialog.confirm({
+                  title: '提示',
+                  message: '您还没有登录，请登录',
+                  cancelButtonText:'注册',
+                  confirmButtonText:'登录',
+                  confirmButtonColor: '#000'
+                }).then(() => {
+                    top.location.href = "login.html"
+                }).catch(() => {
+                    top.location.href = "register.html"
+                });
+            }else{
+                 vant.Dialog.confirm({
+                  title: '提示',
+                  message: '您还没有积分，是否确权积分',
+                  cancelButtonText:'在想想',
+                  confirmButtonText:'去确权',
+                  confirmButtonColor: '#000'
+                }).then(() => {
+                    top.location.href = "login.html"
+                }).catch(() => {
+                });
+            }
+        }
+    })
+}
+</script>
+
+</html>

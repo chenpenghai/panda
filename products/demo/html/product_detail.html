@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>商品详情</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <script type="text/javascript" src="../script/pcbrowser.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/vant.css" />
+    <style>
+        #root-warp{
+            height: 100%;
+            display: flex;
+            display: -webkit-flex;
+            flex-direction: column;
+            -webkit-flex-direction: column;
+        }
+        .content-warp{
+            flex: 1;
+            -webkit-flex: 1;
+            overflow: scroll;
+            -webkit-overflow-scrolling:touch;
+        }
+        .content-warp::-webkit-scrollbar{
+            display: none;
+        }
+        .banner-warp{
+            height: 300px;
+            box-shadow: 0px 0px 12px #888888;
+        }
+        .banner-item{
+            background-position: center;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .product_header{
+            padding: 10px 15px;
+        }
+        .product_header .van-cell{
+            padding: 10px 0px;
+        }
+        .product_header .van-cell:not(:last-child)::after{
+            display: none
+        }
+        .product-content{
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-bottom: 100px;
+        }
+        .product-img{
+            width: 100%;
+        }
+        .van-cell__value{
+            -webkit-flex: 2.5;
+            flex: 2.5;
+        }
+        .product-price-value{
+            font-size: 13px;
+            color: #ce0000;
+        }
+        .product-price-text{
+            font-size:20px;
+        }
+        .product-price-yuan{
+            text-decoration:line-through;
+            color:#aaa;
+        }
+        .product-issue-warp{
+            margin-top: 30px;
+        }
+        .product-issue-title{
+            text-align: center;
+            color: #666;
+        }
+        .product-issue-title>span{
+            width: 40px;
+            height: 1px;
+            margin: 0 10px;
+            background-color: #666;
+            vertical-align: middle;
+        }
+        .issue-item-title{
+            font-size: 15px;
+            color: #666;
+        }
+        .issue-item-title::before{
+            content:'';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #ce0000;
+            margin-right: 5px;
+            vertical-align: middle;
+            border-radius: 3px;
+        }
+        .issue-item-content{
+            padding: 7px 0;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root-warp">
+        <van-nav-bar left-arrow @click-left="onClickLeft" title="电商集"></van-nav-bar>
+        <div class="content-warp">
+            <van-swipe class="banner-warp" :autoplay="3000">
+                <van-swipe-item class="banner-item" v-for="url in bannerArr" :style="{backgroundImage: 'url('+url+')'}" >
+                </van-swipe-item>
+            </van-swipe>
+            <div class="product_header">
+                <h5 class="product-name">艾吉贝2015新款多层收纳真皮单肩斜挎包女包头层牛皮斜跨小包包女</h5>
+                <van-cell class="product-price" title="商城价格" >
+                    <div class="product-price-value" slot="default">
+                        <span class="product-price-text">2000</span>
+                        <span>积分</span>
+                        <span>+22379元</span>&nbsp;&nbsp;
+                        <span class="product-price-yuan">10822元</span>
+                    </div>
+                </van-cell>
+                 <van-cell title="请选择规格数量" is-link>
+                </van-cell>
+                <van-cell title="颜色">
+                    <template slot="default">
+                        <van-tag plain type="danger">黑色</van-tag>
+                        <van-tag  type="danger">红色</van-tag>
+                        <van-tag plain type="danger">黄色</van-tag>
+                        <van-tag plain type="danger">蓝色</van-tag>
+                    </template>
+                </van-cell>
+                <van-cell title="数量" >
+                    <van-stepper slot="default" v-model="selectNum" />
+                </van-cell>
+            </div>
+            <van-tabs class="product-content" v-model="tabIndex">
+                <van-tab title="图文详情">
+                    <img class="product-img" v-for="img in productImgArr" :src="img">
+
+                    <div class="product-issue-warp">
+                        <p class="product-issue-title"><span></span>常见问题<span></span></p>
+                        <div v-for="issue in issueArr">
+                            <p  class="issue-item-title" v-text="issue.title"></p>
+                            <p class="issue-item-content" v-text="issue.content"></p>
+                        </div>
+                    </div>
+                </van-tab>
+                <van-tab title="规格参数">
+                    <van-cell title="上市时间" value="20191/8/2" size="large"></van-cell>
+                    <van-cell title="材料" value="牛皮" size="large"></van-cell>
+                    <van-cell title="重量" value="280g" size="large"></van-cell>
+                </van-tab>
+                <van-tab title="评价(0)">暂无评价</van-tab>
+            </van-tabs>
+
+        </div>
+        <van-goods-action>
+            <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIcon"></van-goods-action-icon>
+            <van-goods-action-icon icon="cart-o" text="购物车" @click="onClickIcon"></van-goods-action-icon>
+            <van-goods-action-button type="warning" text="加入购物车" @click="onClickButton"></van-goods-action-button>
+            <van-goods-action-button type="danger" text="立即购买" @click="onClickButton"></van-goods-action-button>
+        </van-goods-action>
+    </div>
+</body>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/vant.js"></script>
+<script type="text/javascript">
+initVue();
+
+function initVue() {
+    window.rootVue = new Vue({
+        el: '#root-warp',
+        data: function() {
+            return {
+                tabIndex: 0,
+                selectNum:1,
+                bannerArr:['../image/product1.jpg','../image/product2.jpg','../image/product3.jpg','../image/product4.jpg'],
+                productImgArr:['../image/product_info1.jpg','../image/product_info2.jpg','../image/product3.jpg','../image/product_info3.jpg'],
+                issueArr:[
+                        {title:'如何开具发票?',content:'1.如何开具普通发票，请在下单时选择“我要开发票”并填写相关信息'},
+                        {title:'如何开具发票?',content:'1.如何开具普通发票，请在下单时选择“我要开发票”并填写相关信息'},
+                        {title:'如何申请退货?',content:'1.自收到商品之日起30日内，顾客可申请无忧退货，退款将原路返还，不同的银行处理时间不同'},
+                        {title:'如何申请退货?',content:'1.自收到商品之日起30日内，顾客可申请无忧退货，退款将原路返还，不同的银行处理时间不同'},
+                    ]
+            }
+        },
+        methods: {
+            onClickIcon() {
+                vant.Toast('点击图标');
+            },
+            onClickButton() {
+                vant.Toast('点击按钮');
+            },
+            onClickLeft: function() {
+                top.history.back(-1)
+            }
+        },
+        mounted: function() {
+
+        }
+    })
+}
+</script>
+
+</html>

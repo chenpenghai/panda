@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>确认积分</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <script type="text/javascript" src="../script/pcbrowser.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/vant.css" />
+    <style>
+        .content-warp{
+            padding: 1px 15px;
+        }
+        .btn-submit{
+            position: fixed;
+            bottom: 10vh;
+            left:10vw;
+            width: 80vw;
+        }
+        .info-warp{
+            min-height: 100px;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            text-align: center;
+            border: 1px solid #ccc;
+            overflow: auto;
+        }
+        .btn-copy{
+            margin-top: 10px;
+        }
+        .coupon-warp{
+            padding: 5px 0;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root-warp">
+        <van-nav-bar title="电商集"></van-nav-bar>
+        <van-steps :active="1">
+            <van-step>上传PDF合同</van-step>
+            <van-step>确认积分</van-step>
+            <van-step>等待审核</van-step>
+        </van-steps>
+        <div class="content-warp">
+            <h2>合同总金额 52元</h2>
+            <div class="text-right"><van-button type="info" size="small">计算</van-button></div>
+            <div class="info-warp">
+                <p>本次预计确权60500积分</p>
+                <p>请前往www.taobao.com/XXXX。购买确权卷。</p>
+                <p>一张1000点、两张200点、一张10点</p>
+                <div class="text-right"><van-button class="btn-copy"type="default" size="mini">复制地址</van-button></div>
+            </div>
+            <div class="info-warp">
+                <van-field center clearable label="确权点卷" placeholder="输入确权点卷">
+                        <van-button slot="button" size="small" type="info">添加</van-button>
+                </van-field>
+                <div class="coupon-warp">
+                    <div >56498421746</div>
+                    <div>36498432134</div>
+                </div>
+            </div>
+        </div>
+
+        <van-button class="btn-submit" type="info" size="large" @click="submit">提交</van-button>
+    </div>
+</body>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/vant.js"></script>
+<script type="text/javascript">
+initVue();
+
+function initVue() {
+    window.rootVue = new Vue({
+        el: '#root-warp',
+        data: function() {
+            return {
+            }
+        },
+        methods: {
+            submit: function(){
+                top.location.href = "affirm_power3.html"
+            },
+            onClickLeft: function(){
+                top.history.back(-1)
+            }
+        },
+        mounted: function() {
+
+        }
+    })
+}
+</script>
+
+</html>

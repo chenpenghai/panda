@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>上传PDF合同</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <script type="text/javascript" src="../script/pcbrowser.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/vant.css" />
+    <style>
+        .btn-select-file{
+            margin-top: 50px;
+            margin-left: 10vw;
+        }
+        .btn-submit{
+            position: fixed;
+            bottom: 10vh;
+            left:10vw;
+            width: 80vw;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root-warp">
+        <van-nav-bar left-arrow @click-left="onClickLeft" title="电商集"></van-nav-bar>
+        <van-steps :active="0">
+            <van-step>上传PDF合同</van-step>
+            <van-step>确认积分</van-step>
+            <van-step>等待审核</van-step>
+        </van-steps>
+        <van-cell-group>
+            <van-cell v-for="file in fileList" :title="file.name"  />
+        </van-cell-group>
+        <van-uploader class="btn-select-file" accept="application/pdf" :after-read="afterRead" >
+            <van-button type="info" >选择PDF文件</van-button>
+        </van-uploader>
+        <van-button class="btn-submit" type="info" size="large" @click="submit">下一步</van-button>
+    </div>
+</body>
+<script type="text/javascript" src="../script/vue.js"></script>
+<script type="text/javascript" src="../script/vant.js"></script>
+<script type="text/javascript">
+initVue();
+
+function initVue() {
+    window.rootVue = new Vue({
+        el: '#root-warp',
+        data: function() {
+            return {
+                fileList:[]
+            }
+        },
+        methods: {
+            afterRead: function(file){
+                    console.log(this.fileList.length)
+                if(this.fileList.length>=5){
+                    vant.Toast('最多上传五个文件');
+                    return
+                }
+                this.fileList.push(file.file)
+            },
+            submit:function(){
+                 top.location.href = "affirm_power2.html"
+            },
+            onClickLeft:function(){
+                vant.Dialog.confirm({
+                  title: '提示',
+                  message: '您没有操作完成，如果离开将丢失全部数据',
+                  cancelButtonText:'残忍离开',
+                  confirmButtonText:'继续操作',
+                  confirmButtonColor: '#000'
+                }).then(() => {
+                }).catch(() => {
+                    top.history.back(-1)
+                });
+            }
+        },
+        mounted: function() {
+
+        }
+    })
+}
+</script>
+
+</html>
